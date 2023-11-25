@@ -153,3 +153,12 @@ def is50k(opts):
     return dict(is50k_mean=mean, is50k_std=std)
 
 #----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
+# custom
+
+@register_metric
+def fid2k_full(opts):
+    opts.dataset_kwargs.update(max_size=None, xflip=False)
+    fid = frechet_inception_distance.compute_fid(opts, max_real=None, num_gen=2000)
+    return dict(fid50k_full=fid)
